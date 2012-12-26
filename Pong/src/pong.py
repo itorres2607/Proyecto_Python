@@ -18,4 +18,16 @@ def load_image(filename, transparent=False):
 
 return image
 
+def main():
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    pygame.display.set_caption("Proyecto")
+    while True:
+        for eventos in pygame.event.get():
+            if eventos.type == QUIT:
+                sys.exit(0)
+return 0
 
+
+if __name__ == "__main__":
+    pygame.init()
+    main()
