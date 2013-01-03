@@ -19,7 +19,7 @@ class ball(pygame.sprite.Sprite):
         self.rect.centery = HEIGHT / 2
         self.speed = [0.5,-0.5]
 
-    def actualizar(self , time):
+    def actualizar(self , time , p):
         self.rect.centerx += self.speed[0] * time
         self.rect.centery += self.speed[1] * time
         if self.rect.left <= 0 or self.rect.right >= WIDTH:
@@ -28,6 +28,9 @@ class ball(pygame.sprite.Sprite):
         if self.rect.top <= 0 or self.rect.bottom >= HEIGHT:
             self.speed[1] = - self.speed[1]
             self.rect.centery += self.speed[1] * time
+        if pygame.sprite.collide_rect(self , p):
+            self.speed[0] = - self.speed[0]
+            self.rect.centerx += self.speed[0] * time
 
 
 
@@ -91,7 +94,7 @@ def main():
             if eventos.type == QUIT:
                 sys.exit(0)
 
-        bola.actualizar(time)
+        bola.actualizar(time , p1)
         p1.mover(time , keys)
         screen.blit(background_image, (0,0))
         screen.blit(bola.image, bola.rect)
